@@ -27,17 +27,18 @@ line1, = ax.plot(x,y,'r-')
 
 
 while True:
-    y1 = theta[0]+theta[1]*x
-    plt.scatter(x,y,c='b')
-    line1.set_ydata(y1)
+    y1 = theta[0] + theta[1] * x  # Prédictions actuelles
+    plt.scatter(x, y, c='b')      # Affichage des points de données
+    line1.set_ydata(y1)           # Mise à jour de la ligne de régression
     fig.canvas.draw()
 
-    h = x1.dot(theta)
-    error = h-y
+    h = x1.dot(theta)             # Calcul des prédictions (h = Xθ)
+    error = h - y                 # Calcul des erreurs (h - y)
     sqrd_error = np.square(error)
     sum_sqrd_error = np.sum(sqrd_error)
-    cost = (sum_sqrd_error/(2*m))
-    xT = x1.T
-    grad = (xT.dot(error))/(m)
-    theta = theta - alpha*(grad)
-    fig.canvas.flush_events()
+    cost = (sum_sqrd_error / (2 * m))  # Calcul du coût (fonction de coût)
+    
+    xT = x1.T                     # Transposée de X
+    grad = (xT.dot(error)) / m    # Gradient (dérivée partielle)
+    theta = theta - alpha * grad  # Mise à jour des paramètres
+    fig.canvas.flush_events()     # Mise à jour de la figure
